@@ -41,6 +41,26 @@ public class BankAccount {
         if (email.indexOf('@') == -1){
             return false;
         }
+        String prefixString = email.substring(0,email.indexOf('@'));
+        String domainString = email.substring(email.indexOf('@'));
+        if (prefixString.equals("@")){ //if nothing in prefix
+            return false;
+        }
+        if (prefixString.indexOf('.') != -1){ //if prefix has a .
+            return false;
+        }
+        else if (domainString.equals("@")){ //if nothing in domain
+            return false;
+        }
+        else if (domainString.indexOf('.') == -1){ //if no dot
+            return false;
+        }
+        else if (domainString.indexOf('.') == domainString.indexOf('@')+1){ //if nothing before dot
+            return false;
+        }
+        else if (domainString.indexOf('.') == domainString.length()-1){ //if dot is last char, nothing after it
+            return false;
+        }
         else {
             return true;
         }
