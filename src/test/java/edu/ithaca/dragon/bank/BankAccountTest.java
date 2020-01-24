@@ -24,13 +24,15 @@ class BankAccountTest {
 
     @Test
     void isEmailValidTest(){
-        assertTrue(BankAccount.isEmailValid( "a@b.com")); //Border case
+        assertTrue(BankAccount.isEmailValid( "a@b.com")); //EP
         assertFalse(BankAccount.isEmailValid(""));       //Border
         assertFalse(BankAccount.isEmailValid( "a@b."));  //Border
         assertFalse(BankAccount.isEmailValid( "Funny")); //Border
         assertFalse(BankAccount.isEmailValid( "a.@b.com")); //Border
         assertTrue(BankAccount.isEmailValid( "a@b-c.com")); //Border
-        assertTrue(BankAccount.isEmailValid( "a@b.edu")); //Border
+        assertTrue(BankAccount.isEmailValid( "a@b.edu")); //EP
+        assertTrue(BankAccount.isEmailValid( "a@b.io")); //Border
+        assertTrue(BankAccount.isEmailValid( "a@b.q")); //Border
         //Missing border tests for special (invalid) characters like #$%&^*,
             //invalid domains (valid would be like gmail.com, ithaca.edu, etc)
             //more dots in the prefix, no dot in the domain
