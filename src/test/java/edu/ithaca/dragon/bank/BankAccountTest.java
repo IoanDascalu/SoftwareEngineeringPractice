@@ -20,6 +20,8 @@ class BankAccountTest {
         assertEquals(100, bankAccount.getBalance());
         //check for exception thrown correctly
         assertThrows(IllegalArgumentException.class, ()-> new BankAccount("", 100));
+        assertThrows(IllegalArgumentException.class, ()-> bankAccount.withdraw(200));
+
     }
 
     @Test
@@ -32,7 +34,10 @@ class BankAccountTest {
         assertTrue(BankAccount.isEmailValid( "a@b-c.com")); //Border
         assertTrue(BankAccount.isEmailValid( "a@b.edu")); //EP
         assertTrue(BankAccount.isEmailValid( "a@b.io")); //Border
-        assertTrue(BankAccount.isEmailValid( "a@b.q")); //Border
+        assertFalse(BankAccount.isEmailValid( "a@b.q")); //Border
+        assertFalse(BankAccount.isEmailValid("@b.io"));
+        assertFalse(BankAccount.isEmailValid("#Blessed@b.io"));
+        assertFalse(BankAccount.isEmailValid("Find@b..io"));
         //Missing border tests for special (invalid) characters like #$%&^*,
             //invalid domains (valid would be like gmail.com, ithaca.edu, etc)
             //more dots in the prefix, no dot in the domain
