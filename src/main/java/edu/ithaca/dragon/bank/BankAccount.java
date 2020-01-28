@@ -32,7 +32,9 @@ public class BankAccount {
      * @throws IllegalArgumentException if withdraw is larger than amount contained
      */
     public void withdraw (double amount)  {
-        if (amount < 0){
+        String amountStr = Double.toString(amount);
+        amountStr = amountStr.substring(amountStr.indexOf('.')+1);
+        if (amount < 0 || amountStr.length() > 2){ //if amount is negative or the amount has more than two decimal places
             throw new IllegalArgumentException("Invalid withdraw amount, cannot withdraw");
         }
         else if (amount > getBalance()){
