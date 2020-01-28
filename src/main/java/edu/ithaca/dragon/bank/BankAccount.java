@@ -32,21 +32,28 @@ public class BankAccount {
      * @throws IllegalArgumentException if withdraw is larger than amount contained
      */
     public void withdraw (double amount)  {
+        if (amount < 0){
+            throw new IllegalArgumentException("Invalid withdraw amount, cannot withdraw");
+        }
+        else if (amount > getBalance()){
+            throw new IllegalArgumentException("Invalid amount, cannot withdraw more than current balance");
+        }
         balance -= amount;
 
     }
 
 
     public static boolean isEmailValid(String email){
+        //there's probably a better way to do it than this large if-else block but I couldn't think of a way
         if (email.indexOf('@') == -1){
             return false;
         }
         String prefixString = email.substring(0,email.indexOf('@'));
         String domainString = email.substring(email.indexOf('@'));
-        if (prefixString.equals("@")){ //if nothing in prefix
+        if (prefixString.length() == 0){ //if nothing in prefix
             return false;
         }
-        if (prefixString.indexOf('.') != -1){ //if prefix has a .
+        else if (prefixString.indexOf('.') != -1){ //if prefix has a .
             return false;
         }
         else if (domainString.equals("@")){ //if nothing in domain
@@ -55,14 +62,29 @@ public class BankAccount {
         else if (domainString.indexOf('.') == -1){ //if no dot
             return false;
         }
-        else if (domainString.indexOf('.') == domainString.indexOf('@')+1){ //if nothing before dot
+        else if (domainString.contains("..")){ //if two dots in a row
+            return false;
+        }
+        String domainString2 = email.substring(email.indexOf('.')+1);
+        if (domainString.indexOf('.') == domainString.indexOf('@')+1){ //if nothing before dot
             return false;
         }
         else if (domainString.indexOf('.') == domainString.length()-1){ //if dot is last char, nothing after it
             return false;
         }
-        else {
-            return true;
+        else if (domainString2.length() < 2){ //if the domain name after the dot is smaller than two chars
+            return false;
         }
+        String specialStr = "#$%^&*/~`"; //checking for all special characters in the email
+        for (int i = 0; i < specialStr.length(); i++){
+            for (int j = 0; j < email.length(); j++){
+                if (email.charAt(j) == specialStr.charAt(i)){
+                    return false;
+                }
+            }
+        }
+
+        return true;
+
     }
 }
