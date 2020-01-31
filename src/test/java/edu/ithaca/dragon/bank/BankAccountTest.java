@@ -41,11 +41,26 @@ class BankAccountTest {
         assertFalse(BankAccount.isEmailValid("@b.io"));
         assertFalse(BankAccount.isEmailValid("#Blessed@b.io"));
         assertFalse(BankAccount.isEmailValid("Find@b..io"));
+        assertTrue(BankAccount.isEmailValid( "a@bottle.com")); //EP
         //Missing border tests for special (invalid) characters like #$%&^*,
             //invalid domains (valid would be like gmail.com, ithaca.edu, etc)
             //more dots in the prefix, no dot in the domain
 
     }
+
+    @Test
+    void isAmountValidTest(){
+        assertTrue(BankAccount.isAmountValid(100.00));//EP
+        assertTrue(BankAccount.isAmountValid(1020.99));//EP
+        assertFalse(BankAccount.isAmountValid(-100.00));//EP
+        assertTrue(BankAccount.isAmountValid(100.3));//EP
+        assertTrue(BankAccount.isAmountValid(100));//border
+        assertTrue(BankAccount.isAmountValid(0));//border
+        assertFalse(BankAccount.isAmountValid(100.001));//border
+        assertFalse(BankAccount.isAmountValid(100.00000001));//EP
+
+    }
+
 
     @Test
     void constructorTest() {
