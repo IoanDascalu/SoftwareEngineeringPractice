@@ -11,9 +11,13 @@ public class BankAccount {
     public BankAccount(String email, double startingBalance) {
         if (isEmailValid(email)) {
             this.email = email;
-            this.balance = startingBalance;
         } else {
             throw new IllegalArgumentException("Email address: " + email + " is invalid, cannot create account");
+        }
+        if(isAmountValid(startingBalance)){
+            this.balance = startingBalance;
+        } else {
+            throw new IllegalArgumentException("The starting balance" + startingBalance + "is invalid, cannot create account");
         }
     }
 
@@ -31,11 +35,10 @@ public class BankAccount {
      * @post reduces the balance by amount if amount is non-negative and smaller than balance
      */
     public void withdraw(double amount) {
-        String amountStr = Double.toString(amount);
-        amountStr = amountStr.substring(amountStr.indexOf('.') + 1);
-        if (amount < 0 || amountStr.length() > 2) { //if amount is negative or the amount has more than two decimal places
-            throw new IllegalArgumentException("Invalid withdraw amount, cannot withdraw");
-        } else if (amount > getBalance()) {
+        if (!isAmountValid(amount)){
+            throw new IllegalArgumentException("Invalid amount, cannot withdraw.");
+        }
+        if (amount > getBalance()) {
             throw new IllegalArgumentException("Invalid amount, cannot withdraw more than current balance");
         }
         balance -= amount;
