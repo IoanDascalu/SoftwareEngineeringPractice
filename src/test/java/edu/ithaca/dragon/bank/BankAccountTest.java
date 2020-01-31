@@ -31,7 +31,7 @@ class BankAccountTest {
         BankAccount bankAccount = new BankAccount("a@b.com", 200);
         bankAccount.deposit(100);
         assertEquals(300, bankAccount.getBalance());
-        assertThrows(IllegalArgumentException.class, ()-> bankAccount.deposit(200.000));
+        assertThrows(IllegalArgumentException.class, ()-> bankAccount.deposit(200.001));
         assertEquals(300, bankAccount.getBalance());
         assertThrows(IllegalArgumentException.class, ()-> bankAccount.deposit(-200.0));
 

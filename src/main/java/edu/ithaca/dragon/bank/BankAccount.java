@@ -109,9 +109,9 @@ public class BankAccount {
 
     public void deposit(double amount) {
         if (!isAmountValid(amount)){
-            throw new IllegalArgumentException("Invalid amount, cannot withdraw.");
+            throw new IllegalArgumentException("Invalid amount, cannot deposit.");
         }
-        balance +=amount;
+        balance += amount;
 
 
     }
