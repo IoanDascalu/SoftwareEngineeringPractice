@@ -101,4 +101,21 @@ public class BankAccount {
         }
         return true;
     }
+
+    /**
+     * @throws IllegalArgumentException if deposit is negative or has more than 2 numbers after the decimal
+     * @post Increase the balance by amount if amount is non-negative
+     */
+
+    public void deposit(double amount) {
+        /*
+        if (!isAmountValid(amount)){
+            throw new IllegalArgumentException("Invalid amount, cannot withdraw.");
+        }
+        balance +=amount;
+        */
+
+
+    }
+
 }
