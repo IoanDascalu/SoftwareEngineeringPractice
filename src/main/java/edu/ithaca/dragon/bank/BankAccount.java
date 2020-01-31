@@ -88,6 +88,14 @@ public class BankAccount {
      */
 
     public static boolean isAmountValid(double amount) {
-        return false;
+        if (amount<0){
+            return false;
+        }
+        String amountStr = Double.toString(amount);
+        String[] amountList = amountStr.split("\\.", 2);
+        if (amountList[1].length()>2) {
+            return false;
+        }
+        return true;
     }
 }
