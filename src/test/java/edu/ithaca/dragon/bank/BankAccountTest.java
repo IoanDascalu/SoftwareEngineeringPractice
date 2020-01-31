@@ -40,11 +40,12 @@ class BankAccountTest {
     void transferTest(){
         BankAccount bankAccount1 = new BankAccount("a@b.com", 200);
         BankAccount bankAccount2 = new BankAccount("b@a.com", 200);
-        bankAccount1.transfer(100,bankAccount1);
+        bankAccount1.transfer(100,bankAccount2);
         assertEquals(100, bankAccount1.getBalance());
         assertEquals(300, bankAccount2.getBalance());
-        assertThrows(IllegalArgumentException.class, ()-> bankAccount1.transfer(200.001, bankAccount2));
-        assertEquals(300, bankAccount1.getBalance());
+        assertThrows(IllegalArgumentException.class, ()-> bankAccount1.transfer(200.01, bankAccount2));
+        assertEquals(300, bankAccount2.getBalance());
+        assertThrows(IllegalArgumentException.class, ()-> bankAccount1.transfer(50.001, bankAccount2));
         assertThrows(IllegalArgumentException.class, ()-> bankAccount2.transfer(-200.1, bankAccount1));
         assertThrows(IllegalArgumentException.class, ()-> bankAccount1.transfer(200.1, bankAccount1));
     }

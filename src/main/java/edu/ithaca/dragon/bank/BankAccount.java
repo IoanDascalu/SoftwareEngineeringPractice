@@ -117,15 +117,13 @@ public class BankAccount {
     }
     /**
      * @throws IllegalArgumentException if transfer amount is negative or has more than 2 numbers after the decimal
-     * @throws IllegalArgumentException if the accountName is invalid or if it is the same account
      * @post Increase the balance of anouther account by amount if amount is non-negative and decreases it from another account
      */
 
 
     public void transfer(double amount, BankAccount accountName) {
-        balance += amount;
-
-
+        this.withdraw(amount);
+        accountName.deposit(amount);
     }
 
 }
